@@ -1,12 +1,14 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { AcademicNoticesService } from './service/academic-notice.service';
 import { ScholarshipNoticeService } from './service/scholaship-notice.service';
+import { DormitoryNoticeService } from './service/dormitory-notice.service';
 
 @Controller('university-notices')
 export class UnivNoticeController {
   constructor(
     private readonly academicNoticesService: AcademicNoticesService,
     private readonly scholarshipNoticesService: ScholarshipNoticeService,
+    private readonly dormitoryNoticesService: DormitoryNoticeService,
   ) {}
   @Get(':departmentId')
   async getNoticesByDepartment(@Param('departmentId') departmentId: string) {
@@ -21,6 +23,10 @@ export class UnivNoticeController {
         case '010300':
           noticesService = this.scholarshipNoticesService;
           notices = await noticesService.getScholarshipNotices();
+          return notices;
+        case 'dormitory':
+          noticesService = this.dormitoryNoticesService;
+          notices = await noticesService.getDormitoryNotices();
           return notices;
         default:
           throw new Error('Invalid departmentId');
