@@ -2,6 +2,7 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { AcademicNoticesService } from './service/academic-notice.service';
 import { ScholarshipNoticeService } from './service/scholaship-notice.service';
 import { DormitoryNoticeService } from './service/dormitory-notice.service';
+import { UniversityNoticeService } from './service/university-notice.service';
 
 @Controller('university-notices')
 export class UnivNoticeController {
@@ -9,6 +10,7 @@ export class UnivNoticeController {
     private readonly academicNoticesService: AcademicNoticesService,
     private readonly scholarshipNoticesService: ScholarshipNoticeService,
     private readonly dormitoryNoticesService: DormitoryNoticeService,
+    private readonly universityNoticeService: UniversityNoticeService,
   ) {}
   @Get(':departmentId')
   async getNoticesByDepartment(@Param('departmentId') departmentId: string) {
@@ -16,6 +18,10 @@ export class UnivNoticeController {
       let noticesService;
       let notices;
       switch (departmentId) {
+        case '010100':
+          noticesService = this.universityNoticeService;
+          notices = await noticesService.getUniversityNotices();
+          return notices;
         case '010200':
           noticesService = this.academicNoticesService;
           notices = await noticesService.getAcademicNotices();
