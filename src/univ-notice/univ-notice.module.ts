@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { UnivNoticeController } from './univ-notice.controller';
-import { UnivNoticeService } from './univ-notice.service';
+import { AcademicNoticesService } from './service/academic-notice.service';
+import { ScholarshipNoticeService } from './service/scholaship-notice.service';
 
 @Module({
   controllers: [UnivNoticeController],
-  providers: [UnivNoticeService]
+  providers: [AcademicNoticesService, ScholarshipNoticeService],
 })
 export class UnivNoticeModule {}
