@@ -4,6 +4,7 @@ import { AcademicNoticesService } from './service/academic-notice.service';
 import { ScholarshipNoticeService } from './service/scholaship-notice.service';
 import { DormitoryNoticeService } from './service/dormitory-notice.service';
 import { UniversityNoticeService } from './service/university-notice.service';
+import { SoftwareNoticeService } from './service/software-notice.service';
 
 @Module({
   controllers: [UnivNoticeController],
@@ -12,6 +13,7 @@ import { UniversityNoticeService } from './service/university-notice.service';
     ScholarshipNoticeService,
     DormitoryNoticeService,
     UniversityNoticeService,
+    SoftwareNoticeService,
   ],
 })
 export class UnivNoticeModule {}

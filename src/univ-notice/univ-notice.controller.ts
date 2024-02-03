@@ -3,6 +3,7 @@ import { AcademicNoticesService } from './service/academic-notice.service';
 import { ScholarshipNoticeService } from './service/scholaship-notice.service';
 import { DormitoryNoticeService } from './service/dormitory-notice.service';
 import { UniversityNoticeService } from './service/university-notice.service';
+import { SoftwareNoticeService } from './service/software-notice.service';
 
 @Controller('university-notices')
 export class UnivNoticeController {
@@ -11,6 +12,7 @@ export class UnivNoticeController {
     private readonly scholarshipNoticesService: ScholarshipNoticeService,
     private readonly dormitoryNoticesService: DormitoryNoticeService,
     private readonly universityNoticeService: UniversityNoticeService,
+    private readonly softwareNoticeService: SoftwareNoticeService,
   ) {}
   @Get(':departmentId')
   async getNoticesByDepartment(@Param('departmentId') departmentId: string) {
@@ -33,6 +35,10 @@ export class UnivNoticeController {
         case 'dormitory':
           noticesService = this.dormitoryNoticesService;
           notices = await noticesService.getDormitoryNotices();
+          return notices;
+        case 'software':
+          noticesService = this.softwareNoticeService;
+          notices = await noticesService.getSoftwareNotices();
           return notices;
         default:
           throw new Error('Invalid departmentId');
